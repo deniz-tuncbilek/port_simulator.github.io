@@ -148,14 +148,19 @@ export const FlowMap: React.FC<FlowMapProps> = ({ forecast, maxCapacity }) => {
             </div>
             
             <div className="flex-1 relative bg-slate-100 flex items-end">
+              {/* 100% Max Capacity Line */}
+              <div className="absolute w-full border-t-2 border-dashed border-rose-500 z-20" style={{ bottom: '100%' }}>
+                <span className="absolute -top-2.5 right-2 text-[10px] font-bold text-rose-600 bg-white/80 px-1 rounded">100% MAX</span>
+              </div>
+
               {/* 90% Threshold Line */}
-              <div className="absolute w-full border-t-2 border-dashed border-amber-500/50 z-20" style={{ bottom: '90%' }}>
-                <span className="absolute -top-5 right-2 text-[10px] font-bold text-amber-600">90% MAX</span>
+              <div className="absolute w-full border-t-2 border-dashed border-amber-500 z-20" style={{ bottom: '90%' }}>
+                <span className="absolute -top-2.5 right-2 text-[10px] font-bold text-amber-600 bg-white/80 px-1 rounded">90% WARN</span>
               </div>
               
               {/* Fill Level */}
               <motion.div 
-                className={cn("w-full opacity-80", statusColors[forecast.status])}
+                className={cn("w-full opacity-50", statusColors[forecast.status])}
                 initial={{ height: 0 }}
                 animate={{ height: `${percent}%` }}
                 transition={{ type: "spring", stiffness: 50, damping: 15 }}

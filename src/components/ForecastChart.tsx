@@ -44,6 +44,22 @@ export const ForecastChart: React.FC<ForecastChartProps> = ({ forecasts, maxCapa
     return null;
   };
 
+  const CustomReferenceLabel = (props: any) => {
+    const { viewBox, value, fill } = props;
+    const width = 64;
+    const height = 18;
+    const x = viewBox.x + viewBox.width - width;
+    const y = viewBox.y - height / 2;
+    return (
+      <g>
+        <rect x={x} y={y} width={width} height={height} fill="rgba(255, 255, 255, 0.8)" rx={4} />
+        <text x={x + width / 2} y={y + 12} fill={fill} fontSize={10} fontWeight="bold" textAnchor="middle">
+          {value}
+        </text>
+      </g>
+    );
+  };
+
   return (
     <div className="w-full h-[300px] bg-white rounded-2xl border border-slate-200 p-4 shadow-sm flex flex-col">
       <h3 className="text-sm font-bold text-slate-800 mb-4 shrink-0">14-Day Capacity Forecast</h3>
@@ -68,8 +84,18 @@ export const ForecastChart: React.FC<ForecastChartProps> = ({ forecasts, maxCapa
             />
             <Tooltip content={<CustomTooltip />} />
             
-            <ReferenceLine y={maxCapacity} stroke="#f43f5e" strokeDasharray="3 3" label={{ position: 'top', value: 'Max Capacity', fill: '#f43f5e', fontSize: 10, fontWeight: 'bold' }} />
-            <ReferenceLine y={maxCapacity * 0.9} stroke="#f59e0b" strokeDasharray="3 3" label={{ position: 'bottom', value: '90% Threshold', fill: '#f59e0b', fontSize: 10, fontWeight: 'bold' }} />
+            <ReferenceLine 
+              y={maxCapacity} 
+              stroke="#f43f5e" 
+              strokeDasharray="3 3" 
+              label={(props) => <CustomReferenceLabel {...props} value="100% MAX" fill="#f43f5e" />} 
+            />
+            <ReferenceLine 
+              y={maxCapacity * 0.9} 
+              stroke="#f59e0b" 
+              strokeDasharray="3 3" 
+              label={(props) => <CustomReferenceLabel {...props} value="90% WARN" fill="#f59e0b" />} 
+            />
             
             <Line 
               type="monotone" 

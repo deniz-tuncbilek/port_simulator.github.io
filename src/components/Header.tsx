@@ -21,9 +21,9 @@ export const Header: React.FC<HeaderProps> = ({ forecast, maxCapacity, selectedS
   const StatusIcon = statusConfig[forecast.status].icon;
 
   return (
-    <header className="flex items-center justify-between bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+    <header className="flex flex-wrap items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
       {/* Left: Title */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 shrink-0">
         <div className="p-2 bg-blue-600 rounded-lg">
           <Settings2 className="w-6 h-6 text-white" />
         </div>
@@ -34,13 +34,13 @@ export const Header: React.FC<HeaderProps> = ({ forecast, maxCapacity, selectedS
       </div>
 
       {/* Middle: KPIs */}
-      <div className="flex items-center gap-6">
+      <div className="flex flex-wrap items-center gap-4 lg:gap-6">
         <div className="flex flex-col">
           <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Day</span>
           <span className="text-xl font-black text-slate-900">{forecast.day}</span>
         </div>
 
-        <div className="h-8 w-px bg-slate-200" />
+        <div className="hidden sm:block h-8 w-px bg-slate-200" />
 
         <div className="flex flex-col">
           <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Yard</span>
@@ -54,7 +54,7 @@ export const Header: React.FC<HeaderProps> = ({ forecast, maxCapacity, selectedS
           </div>
         </div>
 
-        <div className="h-8 w-px bg-slate-200" />
+        <div className="hidden sm:block h-8 w-px bg-slate-200" />
 
         <div className="flex flex-col">
           <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Net</span>
@@ -72,7 +72,7 @@ export const Header: React.FC<HeaderProps> = ({ forecast, maxCapacity, selectedS
           </div>
         </div>
 
-        <div className="h-8 w-px bg-slate-200" />
+        <div className="hidden sm:block h-8 w-px bg-slate-200" />
 
         <div className={cn(
           "flex items-center gap-2 px-3 py-1.5 rounded-lg border",
@@ -92,12 +92,12 @@ export const Header: React.FC<HeaderProps> = ({ forecast, maxCapacity, selectedS
       </div>
 
       {/* Right: Scenario */}
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 shrink-0 ml-auto lg:ml-0">
         <label className="text-xs font-bold text-slate-600 uppercase tracking-wider">Scenario:</label>
         <select 
           value={selectedScenario}
           onChange={(e) => setSelectedScenario(e.target.value)}
-          className="bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 font-medium shadow-sm cursor-pointer"
+          className="bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 font-medium shadow-sm cursor-pointer max-w-[200px] truncate"
         >
           {scenarios.map(s => (
             <option key={s.id} value={s.id}>{s.name}</option>
